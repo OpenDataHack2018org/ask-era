@@ -3,7 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  identityPoolId: "eu-west-1:2ebdfee0-ad4e-4a03-9aec-e03dccf8f72d"
 };
 
 /*
