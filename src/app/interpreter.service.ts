@@ -1,5 +1,7 @@
+/**
+ * Interprets a value for the climate variable state to present to the user e.g. low cloud = "Sunny"
+ */
 import { Injectable } from '@angular/core';
-import {ClimateVariable} from "./climate.variable";
 import {ClimateResult} from "./climate.result";
 
 @Injectable({
@@ -12,6 +14,6 @@ export class InterpreterService {
   }
 
   interpret(result: ClimateResult): string {
-
+    throw new Error("Not implemented yet");
   }
 }
