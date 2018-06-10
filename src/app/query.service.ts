@@ -14,8 +14,7 @@ import {HttpUtilsService} from "./http.utils.service";
 import {ResultJson} from "./result.json";
 import {EntityExtractorService} from "./entity.extractor.service";
 import * as KeywordExtractor from "keyword-extractor";
-import {entityValue} from "aws-sdk/clients/health";
-import {environment} from "../environments/environment";
+import {DataFormat} from "@djabry/cdsapi";
 
 @Injectable({
   providedIn: 'root'
@@ -72,8 +71,8 @@ export class QueryService {
 
   async createQuery(input: string): Promise<Query> {
 
-     // const comprehend = await this.awsService.getService(Comprehend);
-     // const data = await comprehend.detectEntities({Text: input, LanguageCode: "en"}).promise();
+    // const comprehend = await this.awsService.getService(Comprehend);
+    // const data = await comprehend.detectEntities({Text: input, LanguageCode: "en"}).promise();
     // const entites = data.Entities.sort((e1, e2) => e2.Score - e1.Score);
 
     const snerEntites = await this.snerEntityService.extractEntities(input);
@@ -114,7 +113,36 @@ export class QueryService {
   }
 
   toDataRequest(query: Query): DataRequest {
-    throw new Error("Not implemented yet");
+    const date = new Date(Math.round((query.dateRange.max.getTime() + query.dateRange.min.getTime())/2) );
+    const isoDate = date.toISOString();
+    const datePart = isoDate.split("T")[0];
+    const timePart = isoDate.split("T")[1];
+    const timeParts = timePart.split(":");
+    const hour = timeParts[0];
+    const dateParts = datePart.split("-");
+    const year = dateParts[0];
+    const month = dateParts[1];
+    const day = dateParts[2];
+    const latRange = query.geoCoordinates.latitude;
+    const lonRange = query.geoCoordinates.longitude;
+    const grid = [latRange, lonRange].map(range => `${Math.ceil(range.max - range.min)}`);
+    const area = [latRange.max, lonRange.min, latRange.min, lonRange.max].map(coord => `${coord}`);
+    const time = `${hour}:00`;
+
+    return  {
+      name: "reanalysis-era5-single-levels",
+      options: {
+        variable: query.variable,
+        product_type: "reanalysis",
+        grid,
+        area,
+        year,
+        month,
+        day,
+        time,
+        format: DataFormat.grib
+      }
+    };
   }
 
   async runQuery(query: Query): Promise<ResultJson> {

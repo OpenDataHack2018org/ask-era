@@ -21,7 +21,7 @@ export class QueryInputComponent implements OnInit {
   async onSubmit() {
     const text = this.queryFormControl.value;
     const query = await this.queryService.createQuery(text);
-    console.log(query);
+    const dataRequest = this.queryService.toDataRequest(query);
   }
 
 }
