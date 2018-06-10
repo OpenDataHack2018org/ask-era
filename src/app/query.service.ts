@@ -9,6 +9,10 @@ import {Entity} from "aws-sdk/clients/comprehend";
 import {ClimateVariable} from "./climate.variable";
 import * as tokenizer from "string-tokenizer";
 import * as stemmer from "en-stemmer";
+import {CdsClientService} from "./cds.client.service";
+import {DataRequest} from "@djabry/cdsapi/src/data.request";
+import {HttpUtilsService} from "./http.utils.service";
+import {ResultJson} from "./result.json";
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +22,9 @@ export class QueryService {
   stems: Record<ClimateVariable, string[]>;
 
   constructor(private awsService: AwsService,
-              private geoService: GeoService) {
+              private geoService: GeoService,
+              private cdsClient: CdsClientService,
+              private httpUtils: HttpUtilsService) {
     this.stems = {
       [ClimateVariable.Temperature]: ["hot", "cold", "warm", "freeze"],
       [ClimateVariable.TotalCloudCover]: ["sun", "cloud", "clear", "overcast"],
@@ -89,5 +95,17 @@ export class QueryService {
     };
 
   }
+
+  toDataRequest(query: Query): DataRequest {
+    throw new Error("Not implemented yet");
+  }
+
+  async runQuery(query: Query): Promise<ResultJson> {
+    const request = this.toDataRequest(query);
+    const gribLink = await this.cdsClient.requestGrib(request);
+    const downloadLink = await this.cdsClient.requestJsonLink(gribLink);
+    return await this.httpUtils.get(downloadLink.link);
+  }
+
 
 }
