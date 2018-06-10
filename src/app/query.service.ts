@@ -7,12 +7,13 @@ import {Date as SugarDate} from "sugar";
 import {QueryError} from "./query.error";
 import {Entity} from "aws-sdk/clients/comprehend";
 import {ClimateVariable} from "./climate.variable";
-import * as tokenizer from "string-tokenizer";
 import * as stemmer from "en-stemmer";
 import {CdsClientService} from "./cds.client.service";
 import {DataRequest} from "@djabry/cdsapi/src/data.request";
 import {HttpUtilsService} from "./http.utils.service";
 import {ResultJson} from "./result.json";
+import {EntityExtractorService} from "./entity.extractor.service";
+import * as KeywordExtractor from "keyword-extractor";
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,8 @@ export class QueryService {
   constructor(private awsService: AwsService,
               private geoService: GeoService,
               private cdsClient: CdsClientService,
-              private httpUtils: HttpUtilsService) {
+              private httpUtils: HttpUtilsService,
+              private snerEntityService: EntityExtractorService) {
     this.stems = {
       [ClimateVariable.Temperature]: ["hot", "cold", "warm", "freeze"],
       [ClimateVariable.TotalCloudCover]: ["sun", "cloud", "clear", "overcast"],
@@ -50,7 +52,12 @@ export class QueryService {
 
   toVariable(input: string): ClimateVariable {
 
-    const stems = tokenizer(input).map(word => stemmer.stemmer(word));
+    const stems = KeywordExtractor.extract(input, {
+      language:"english",
+      remove_digits: true,
+      return_changed_case: true,
+      remove_duplicates: true
+    }).map(word => stemmer.stemmer(word));
 
     return Object.keys(this.stems).find(variable => {
       const validStems = this.stems[variable] as string[];
@@ -61,11 +68,15 @@ export class QueryService {
 
   async createQuery(input: string): Promise<Query> {
 
-    const comprehend = await this.awsService.getService(Comprehend);
-    const data = await comprehend.detectEntities({Text: input, LanguageCode: "en"}).promise();
-    const entites = data.Entities.sort((e1, e2) => e2.Score - e1.Score);
-    const dates = this.toDates(entites);
-    const locations = this.toLocations(entites);
+    // const comprehend = await this.awsService.getService(Comprehend);
+    // const data = await comprehend.detectEntities({Text: input, LanguageCode: "en"}).promise();
+    // const entites = data.Entities.sort((e1, e2) => e2.Score - e1.Score);
+
+    const snerEntites = await this.snerEntityService.extractEntities(input);
+    const entities = this.snerEntityService.toAwsEntities(snerEntites).sort((e1, e2) => e2.Score - e1.Score);
+
+    const dates = this.toDates(entities);
+    const locations = this.toLocations(entities);
     if(!dates.length) {
       throw new Error(QueryError.NoDatesFound);
     }

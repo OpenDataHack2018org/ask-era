@@ -1,13 +1,7 @@
 export interface GoogleResult {
-  json: JSONResult;
-  status: number;
-}
-
-
-export interface JSONResult {
   error_message: string;
+  results: GoogleResultEntry[];
   status: string;
-  results: GoogleResultEntry[]
 }
 
 export interface AddressComponent {
