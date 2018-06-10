@@ -29,7 +29,7 @@ export class GeoService {
 
   async getGeoCoordinates(input: string): Promise<GeoCoordinates> {
     const response = await this.httpUtils
-      .get(`https://maps.googleapis.com/maps/api/geocode/json?address=Toledo&key=${environment.googleApiKey}`) as GoogleResult;
+      .get(`https://maps.googleapis.com/maps/api/geocode/json?address=${input}&key=${environment.googleApiKey}`) as GoogleResult;
     if(response.status === "OK") {
       const results = response.results;
       // Get the top result
