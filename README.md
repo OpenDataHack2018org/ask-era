@@ -2,12 +2,10 @@
 This project aims to provide an easy-to-use natural language interface to ERA data.
 
 ## Some example requests
-"What was the cloud cover in Slovenia on May 10th 2001?"
-"Last year was the warmest in recorded history."
-"What was the US temperature on November 10th?"
-"Give me the highest temperature for last year in London."
-"2017 was as cloudy as 2005."
-
+* "Was it cloudy in Slovenia on May 10th 2011?"
+* "Did it rain in Glasgow on December 5th 2012?"
+* "Was it windy in Chicago on 25th March 2017?"
+* "Was it cloudy in San Francisco on 13th March 2014?"
 
 ## Entity Categories
 ### Location
@@ -24,9 +22,6 @@ specific season | meteorological season (DJF, MAM, JJA, SON) of the current year
 "day", "today" | day prior to the day when the news item was published
 "night" | night prior to the day when the news item was published
 specific day (Monday - Sunday) | day in the year when the news item was published
-
-### Two Dates
-* Query all time steps in between the first and the second year of the query.
 
 
 ## Key phrases
