@@ -6,6 +6,8 @@ import {MatDialog} from "@angular/material";
 import {AuthService} from "../auth.service";
 import {ProgressComponent} from "../progress/progress.component";
 import {OutputService} from "../output.service";
+import {QueryError} from "../query.error";
+import {ErrorComponent} from "../error/error.component";
 
 @Component({
   selector: 'app-query-input',
@@ -14,11 +16,17 @@ import {OutputService} from "../output.service";
 })
 export class QueryInputComponent implements OnInit {
 
+  expectedErrors: Record<QueryError, string>;
   constructor(private queryService: QueryService,
               private interpreter: InterpreterService,
               private dialog: MatDialog,
               private authService: AuthService,
               private outputService: OutputService) {
+    this.expectedErrors = {
+      [QueryError.NoDatesFound]: "Please include a date",
+      [QueryError.NoVariableFound]: "Please include a variable",
+      [QueryError.NoLocationsFound]: "Please include a location"
+    };
   }
 
   queryFormControl = new FormControl('', [
@@ -48,6 +56,13 @@ export class QueryInputComponent implements OnInit {
       ref.close();
     } catch (err) {
       ref.close();
+
+      if(err.message && this.expectedErrors[err.message]) {
+        const errorToDisplay = this.expectedErrors[err.message];
+        const errorRef = this.dialog.open(ErrorComponent);
+        errorRef.componentInstance.message = errorToDisplay;
+      }
+
     }
 
 

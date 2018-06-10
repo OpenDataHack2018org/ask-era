@@ -31,8 +31,8 @@ export class QueryService {
     this.stems = {
       [ClimateVariable.Temperature]: ["hot", "cold", "warm", "freeze"],
       [ClimateVariable.TotalCloudCover]: ["sun", "cloud", "clear", "overcast"],
-      [ClimateVariable.TotalPrecipitation]: ["wet", "rain"],
-      [ClimateVariable.WindSpeed]: ["wind"]
+      [ClimateVariable.TotalPrecipitation]: ["dry", "wet", "rain", "moist"],
+      [ClimateVariable.WindSpeed]: ["wind", "storm", "calm"]
     }
 
   }
