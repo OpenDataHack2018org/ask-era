@@ -8,7 +8,6 @@ This project aims to provide an easy-to-use natural language interface to ERA da
 * "Was it cloudy in San Francisco on 13th March 2014?"
 * "It was rainy in Leipzig on June 3rd 2013."
 * "There was a storm in Reykjavik on December 15th 2016."
-* "It was very hot in Kuwait in June 2015."
 * "It was hot in Freiburg on July 20th 2017."
 
 ## Entity Categories
