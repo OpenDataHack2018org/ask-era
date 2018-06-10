@@ -9,13 +9,19 @@ import {QueryService} from "../query.service";
 })
 export class QueryInputComponent implements OnInit {
 
-  constructor(queryService: QueryService) {
+  constructor(private queryService: QueryService) {
   }
 
   queryFormControl = new FormControl('', [
     Validators.required
   ]);
   ngOnInit() {
+  }
+
+  async onSubmit() {
+    const text = this.queryFormControl.value;
+    const query = await this.queryService.createQuery(text);
+    console.log(query);
   }
 
 }

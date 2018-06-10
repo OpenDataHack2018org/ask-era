@@ -1,8 +1,5 @@
-<form class="query-form">
+<form class="query-form" (ngSubmit)="onSubmit()">
   <mat-form-field class="full-width">
     <input matInput placeholder="Your query" [formControl]="queryFormControl">
   </mat-form-field>
-  <button mat-button>
-    Ask
-  </button>
 </form>
