@@ -20,16 +20,16 @@ export class InterpreterService {
   descriptions: Record<ClimateVariable, StateDescription>;
   constructor() {
     this.thresholds = {
-      [ClimateVariable.Temperature]: {min: 278, max: 303},
+      [ClimateVariable.Temperature]: {min: 283, max: 303},
       [ClimateVariable.WindSpeed]: {min: 0.2, max: 5},
       [ClimateVariable.TotalCloudCover]: {min: 0.2, max: 0.8},
       [ClimateVariable.TotalPrecipitation]: {min: 0.01, max: 20}
     };
     this.descriptions = {
       [ClimateVariable.Temperature]: {low: "cold", medium: "warm", high: "hot"},
-      [ClimateVariable.WindSpeed]: {low: "calm", medium: "moderate", high: "strong"},
-      [ClimateVariable.TotalCloudCover]: {low: "sunny", medium: "light clouds", high: "cloudy"},
-      [ClimateVariable.TotalPrecipitation]: {low: "dry", medium: "light rain", high: "rainy"}
+      [ClimateVariable.WindSpeed]: {low: "calm", medium: "moderately windy", high: "very windy"},
+      [ClimateVariable.TotalCloudCover]: {low: "sunny", medium: "moderately cloudy", high: "very cloudy"},
+      [ClimateVariable.TotalPrecipitation]: {low: "dry", medium: "raining lightly", high: "rainy"}
     };
   }
 

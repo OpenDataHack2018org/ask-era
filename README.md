@@ -1,4 +1,5 @@
-# ask-era
+# Ask ERA
+This project aims to provide an easy-to-use interface to ERA data
 
 ## Some example requests
 "What was the cloud cover in Slovenia in May 2001?"
