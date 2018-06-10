@@ -23,7 +23,7 @@ export class InterpreterService {
       [ClimateVariable.Temperature]: {min: 283, max: 303},
       [ClimateVariable.WindSpeed]: {min: 0.2, max: 5},
       [ClimateVariable.TotalCloudCover]: {min: 0.2, max: 0.8},
-      [ClimateVariable.TotalPrecipitation]: {min: 0.01/1000, max: 20/1000}
+      [ClimateVariable.TotalPrecipitation]: {min: 0.01/1000, max: 10/1000}
     };
     this.descriptions = {
       [ClimateVariable.Temperature]: {low: "cold", medium: "warm", high: "hot"},
