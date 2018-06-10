@@ -33,9 +33,9 @@
     "keyword-extractor": "0.0.15",
     "node-geocoder": "^3.22.0",
     "node-libs-browser": "2.1.0",
-    "rxjs": "6.0.0",
     "sugar": "2.0.4",
-    "zone.js": "0.8.26"
+    "zone.js": "0.8.26",
+    "rxjs": "6.2.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.6.8",

@@ -134,7 +134,7 @@ export class QueryService {
       options: {
         variable: query.variable,
         product_type: "reanalysis",
-        grid,
+        grid, // Don't include the grid in order to get some stats
         area,
         year,
         month,

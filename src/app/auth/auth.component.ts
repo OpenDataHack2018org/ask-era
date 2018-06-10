@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, Validators} from "@angular/forms";
 import {MatDialogRef} from "@angular/material";
-
+import { map } from 'rxjs/operators'
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',

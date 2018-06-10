@@ -1,3 +1,7 @@
-import {ClimateVariable} from "./climate.variable";
+import {Range} from "./range";
+export interface ClimateVariableState extends Range<number>{
+  average: number;
+  normalized: number;
+}
 
-export type ClimateVariableState = number;
+
