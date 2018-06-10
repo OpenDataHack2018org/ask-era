@@ -1,8 +1,8 @@
 # Ask ERA
-This project aims to provide an easy-to-use interface to ERA data
+This project aims to provide an easy-to-use natural language interface to ERA data.
 
 ## Some example requests
-"What was the cloud cover in Slovenia in May 2001?"
+"What was the cloud cover in Slovenia on May 10th 2001?"
 "Last year was the warmest in recorded history."
 "What was the US temperature on November 10th?"
 "Give me the highest temperature for last year in London."
