@@ -15,6 +15,7 @@ import {
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AuthComponent } from './auth/auth.component';
 import { ProgressComponent } from './progress/progress.component';
+import { OutputComponent } from './output/output.component';
 
 @NgModule({
   entryComponents: [
@@ -25,7 +26,8 @@ import { ProgressComponent } from './progress/progress.component';
     AppComponent,
     QueryInputComponent,
     AuthComponent,
-    ProgressComponent
+    ProgressComponent,
+    OutputComponent
   ],
   imports: [
     MatProgressBarModule,

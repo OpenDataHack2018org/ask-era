@@ -5,6 +5,7 @@ import {InterpreterService} from "../interpreter.service";
 import {MatDialog} from "@angular/material";
 import {AuthService} from "../auth.service";
 import {ProgressComponent} from "../progress/progress.component";
+import {OutputService} from "../output.service";
 
 @Component({
   selector: 'app-query-input',
@@ -16,7 +17,8 @@ export class QueryInputComponent implements OnInit {
   constructor(private queryService: QueryService,
               private interpreter: InterpreterService,
               private dialog: MatDialog,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private outputService: OutputService) {
   }
 
   queryFormControl = new FormControl('', [
@@ -27,6 +29,7 @@ export class QueryInputComponent implements OnInit {
 
   async onSubmit() {
 
+    this.outputService.message = "";
     await this.authService.requestApiKey();
     const ref = this.dialog.open(ProgressComponent);
     ref.disableClose = true;
@@ -39,8 +42,9 @@ export class QueryInputComponent implements OnInit {
       ref.componentInstance.message = `Requesting data for ${query.variable} in ${query.googleResult.formatted_address}`;
       const result = await this.queryService.runQuery(query);
       const climateResult = this.interpreter.parseData(query.variable, result);
-      const message = this.interpreter.interpret(climateResult);
+      const message = this.interpreter.interpret(climateResult, query);
       console.log(message);
+      this.outputService.message = message;
       ref.close();
     } catch (err) {
       ref.close();

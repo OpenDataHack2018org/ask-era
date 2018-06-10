@@ -139,7 +139,7 @@ export class QueryService {
         year,
         month,
         day,
-        time,
+       // time,
         format: DataFormat.grib
       }
     };

@@ -1,4 +1,5 @@
 import {Component, ViewEncapsulation} from '@angular/core';
+import {OutputService} from "./output.service";
 
 @Component({
   selector: 'app-root',
@@ -8,4 +9,7 @@ import {Component, ViewEncapsulation} from '@angular/core';
 })
 export class AppComponent {
   title = 'Ask ERA';
+  constructor(public outputService: OutputService) {
+
+  }
 }

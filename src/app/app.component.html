@@ -3,4 +3,7 @@
 <mat-card>
   <app-query-input></app-query-input>
 </mat-card>
+<mat-card *ngIf="outputService.message">
+  <app-output></app-output>
+</mat-card>
 
