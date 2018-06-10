@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {AwsService} from "./aws.service";
 import {Query} from "./query";
-import {Client} from "@djabry/cdsapi";
 import {GeoService} from "./geo.service";
 import * as Comprehend from "aws-sdk/clients/comprehend";
 import {Date as SugarDate} from "sugar";
@@ -19,8 +18,7 @@ export class QueryService {
   stems: Record<ClimateVariable, string[]>;
 
   constructor(private awsService: AwsService,
-              private geoService: GeoService,
-              private cdsClient: Client) {
+              private geoService: GeoService) {
     this.stems = {
       [ClimateVariable.Temperature]: ["hot", "cold", "warm", "freeze"],
       [ClimateVariable.TotalCloudCover]: ["sun", "cloud", "clear", "overcast"],

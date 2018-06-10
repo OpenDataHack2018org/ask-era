@@ -10,7 +10,6 @@ import {QueryService} from "../query.service";
 export class QueryInputComponent implements OnInit {
 
   constructor(queryService: QueryService) {
-
   }
 
   queryFormControl = new FormControl('', [
