@@ -14,15 +14,18 @@ import {
 } from "@angular/material";
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AuthComponent } from './auth/auth.component';
+import { ProgressComponent } from './progress/progress.component';
 
 @NgModule({
   entryComponents: [
-    AuthComponent
+    AuthComponent,
+    ProgressComponent
   ],
   declarations: [
     AppComponent,
     QueryInputComponent,
-    AuthComponent
+    AuthComponent,
+    ProgressComponent
   ],
   imports: [
     MatDialogModule,

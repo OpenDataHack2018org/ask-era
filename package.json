@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deploy": "npm run build -- --prod && aws s3 sync dist/ask-era s3://ask-era"
+    "deploy": "npm run build -- --prod && aws s3 sync dist/ask-era s3://ask-era --delete"
   },
   "private": true,
   "dependencies": {
