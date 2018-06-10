@@ -7,8 +7,9 @@ import * as Comprehend from "aws-sdk/clients/comprehend";
 import {Date as SugarDate} from "sugar";
 import {QueryError} from "./query.error";
 import {Entity} from "aws-sdk/clients/comprehend";
-import {PorterStemmer, WordTokenizer} from "natural";
 import {ClimateVariable} from "./climate.variable";
+import * as tokenizer from "string-tokenizer";
+import * as stemmer from "en-stemmer";
 
 @Injectable({
   providedIn: 'root'
@@ -42,10 +43,10 @@ export class QueryService {
       .map(entity => entity.Text);
   }
 
+
   toVariable(input: string): ClimateVariable {
-    const tokenizer = new WordTokenizer();
-    const stems = tokenizer.tokenize(input)
-      .map(word => PorterStemmer.stem(word));
+
+    const stems = tokenizer(input).map(word => stemmer.stemmer(word));
 
     return Object.keys(this.stems).find(variable => {
       const validStems = this.stems[variable] as string[];
