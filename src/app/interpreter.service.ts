@@ -4,6 +4,7 @@
 import { Injectable } from '@angular/core';
 import {ClimateResult} from "./climate.result";
 import {ResultJson} from "./result.json";
+import {ClimateVariable} from "./climate.variable";
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +12,10 @@ import {ResultJson} from "./result.json";
 export class InterpreterService {
 
   constructor() {
-
   }
 
-  parseData(resultJson: ResultJson): ClimateResult {
+  parseData(variable: ClimateVariable, resultJson: ResultJson): ClimateResult {
+   console.log(resultJson);
     throw new Error("Not implemented yet");
   }
 
