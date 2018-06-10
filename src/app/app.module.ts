@@ -6,11 +6,13 @@ import { QueryInputComponent } from './query.input/query.input.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule, MatToolbarModule} from "@angular/material";
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { AuthComponent } from './auth/auth.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    QueryInputComponent
+    QueryInputComponent,
+    AuthComponent
   ],
   imports: [
     MatCardModule,
