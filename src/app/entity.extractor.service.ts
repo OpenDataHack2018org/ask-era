@@ -23,7 +23,8 @@ export class EntityExtractorService {
       for(const child of snerEntities[type]) {
         entities.push({
           Type: type,
-          Score: child.count
+          Score: child.count,
+          Text: child.name
         })
       }
 
