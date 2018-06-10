@@ -1,8 +1,12 @@
+<p>
+  Please enter you CDS toolbox credentials
+</p>
 <form class="query-form" (ngSubmit)="onSubmit()">
-  <mat-form-field class="full-width">
-    <input matInput placeholder="CSS username" [formControl]="usernameFormControl">
-  </mat-form-field>
-  <mat-form-field class="full-width">
-    <input matInput placeholder="CDS password" [formControl]="passwordFormControl" type="password">
-  </mat-form-field>
+    <mat-form-field class="full-width">
+      <input matInput placeholder="CSS username" [formControl]="usernameFormControl">
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input matInput placeholder="CDS password" [formControl]="passwordFormControl" type="password">
+    </mat-form-field>
+  <button mat-button type="submit">OK</button>
 </form>

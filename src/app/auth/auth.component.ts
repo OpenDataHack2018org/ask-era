@@ -27,8 +27,10 @@ export class AuthComponent implements OnInit {
   }
 
   onSubmit() {
-    const apiKey = `${this.usernameFormControl.value}:${this.passwordFormControl.value}`;
-    this.ref.close(apiKey);
+    if(this.usernameFormControl.valid && this.passwordFormControl.valid) {
+      const apiKey = `${this.usernameFormControl.value}:${this.passwordFormControl.value}`;
+      this.ref.close(apiKey);
+    }
   }
 
 }

@@ -24,7 +24,7 @@
     "@angular/platform-browser-dynamic": "6.0.3",
     "@angular/router": "6.0.3",
     "@djabry/aws-factory": "0.0.17",
-    "@djabry/cdsapi": "0.0.5",
+    "@djabry/cdsapi": "0.0.6",
     "@google/maps": "0.4.6",
     "aws-sdk": "2.254.1",
     "core-js": "2.5.4",

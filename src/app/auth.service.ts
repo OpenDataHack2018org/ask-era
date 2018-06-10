@@ -15,9 +15,12 @@ export class AuthService implements AuthenticationService {
   requestApiKey(): Promise<string> {
     const ref = this.dialog.open(AuthComponent);
     ref.disableClose = true;
-    ref.afterClosed().subscribe(result => {
-
+    return new Promise(resolve => {
+      ref.afterClosed().subscribe(result => {
+        resolve(result);
+      });
     });
+
   }
 
   async getApiKey(): Promise<string> {
