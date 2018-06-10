@@ -1,3 +1,8 @@
-<p>
-  auth works!
-</p>
+<form class="query-form" (ngSubmit)="onSubmit()">
+  <mat-form-field class="full-width">
+    <input matInput placeholder="CSS username" [formControl]="usernameFormControl">
+  </mat-form-field>
+  <mat-form-field class="full-width">
+    <input matInput placeholder="CDS password" [formControl]="passwordFormControl" type="password">
+  </mat-form-field>
+</form>

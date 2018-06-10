@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {FormControl, Validators} from "@angular/forms";
+import {MatDialogRef} from "@angular/material";
 
 @Component({
   selector: 'app-auth',
@@ -7,9 +9,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AuthComponent implements OnInit {
 
-  constructor() { }
+  constructor(public ref: MatDialogRef<AuthComponent>) {
+  }
+
+  usernameFormControl = new FormControl('', [
+    Validators.required,
+    Validators.minLength(1)
+  ]);
+
+  passwordFormControl = new FormControl('', [
+    Validators.required,
+    Validators.minLength(36),
+    Validators.maxLength(36)
+  ]);
 
   ngOnInit() {
+  }
+
+  onSubmit() {
+    const apiKey = `${this.usernameFormControl.value}:${this.passwordFormControl.value}`;
+    this.ref.close(apiKey);
   }
 
 }
