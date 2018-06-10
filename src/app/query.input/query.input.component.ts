@@ -33,7 +33,10 @@ export class QueryInputComponent implements OnInit {
     try {
 
       const text = this.queryFormControl.value;
+      ref.componentInstance.message = "Interpreting your query...";
       const query = await this.queryService.createQuery(text);
+
+      ref.componentInstance.message = `Requesting data for ${query.variable} in ${query.googleResult.formatted_address}`;
       const result = await this.queryService.runQuery(query);
       const climateResult = this.interpreter.parseData(query.variable, result);
       const message = this.interpreter.interpret(climateResult);

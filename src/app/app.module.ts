@@ -9,7 +9,7 @@ import {
   MatCardModule,
   MatDialogModule,
   MatFormFieldModule,
-  MatInputModule,
+  MatInputModule, MatProgressBarModule,
   MatToolbarModule
 } from "@angular/material";
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -28,6 +28,7 @@ import { ProgressComponent } from './progress/progress.component';
     ProgressComponent
   ],
   imports: [
+    MatProgressBarModule,
     MatDialogModule,
     MatCardModule,
     MatButtonModule,

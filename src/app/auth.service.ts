@@ -12,22 +12,22 @@ export class AuthService implements AuthenticationService {
   constructor(private dialog: MatDialog) {
   }
 
-  requestApiKey(): Promise<string> {
-    const ref = this.dialog.open(AuthComponent);
-    ref.disableClose = true;
-    return new Promise(resolve => {
-      ref.afterClosed().subscribe(result => {
-        resolve(result);
+  async requestApiKey(): Promise<void> {
+    if(!this.apiKey) {
+      const ref = this.dialog.open(AuthComponent);
+      ref.disableClose = true;
+      this.apiKey = await new Promise<string>(resolve => {
+        ref.afterClosed().subscribe(result => {
+          resolve(result);
+        });
       });
-    });
+    }
+
 
   }
 
   async getApiKey(): Promise<string> {
-    if(!this.apiKey) {
-      this.apiKey = await this.requestApiKey();
-    }
-
+    await this.requestApiKey();
     return this.apiKey;
   }
 }
