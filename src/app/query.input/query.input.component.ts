@@ -23,7 +23,7 @@ export class QueryInputComponent implements OnInit {
               private authService: AuthService,
               private outputService: OutputService) {
     this.expectedErrors = {
-      [QueryError.NoDatesFound]: "Please include a date",
+      [QueryError.NoDatesFound]: "Please include a date between 2008 and 2017",
       [QueryError.NoVariableFound]: "Please include a variable",
       [QueryError.NoLocationsFound]: "Please include a location"
     };

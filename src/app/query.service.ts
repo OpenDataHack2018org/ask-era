@@ -80,7 +80,7 @@ export class QueryService {
 
     const dates = this.toDates(entities);
     const locations = this.toLocations(entities);
-    if(!dates.length) {
+    if(!dates.length || !dates.find(date => date.getUTCFullYear() < 2018 && date.getUTCFullYear() > 2007)) {
       throw new Error(QueryError.NoDatesFound);
     }
     if(!locations.length) {
@@ -92,7 +92,8 @@ export class QueryService {
     const geoCoordinates = this.geoService.toGeoCoordinates(googleResult.geometry);
 
     // Put dates into ascending order
-    dates.sort((d1, d2) => d1.getTime() - d2.getTime());
+    dates.filter(date => date.getUTCFullYear() > 2007 && date.getUTCFullYear() < 2018)
+      .sort((d1, d2) => d1.getTime() - d2.getTime());
 
     const climateVariable = this.toVariable(input);
 
