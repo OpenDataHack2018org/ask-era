@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {GeoCoordinates} from "./geo.coordinates";
 import {environment} from "../environments/environment";
-import {GoogleGeometry, GoogleResult} from "./google.result";
+import {GoogleGeometry, GoogleResult, GoogleResultEntry} from "./google.result";
 import {HttpUtilsService} from "./http.utils.service";
 
 @Injectable({
@@ -27,16 +27,13 @@ export class GeoService {
     };
   }
 
-  async getGeoCoordinates(input: string): Promise<GeoCoordinates> {
+  async getGoogleResult(input: string): Promise<GoogleResultEntry> {
     const response = await this.httpUtils
       .get(`https://maps.googleapis.com/maps/api/geocode/json?address=${input}&key=${environment.googleApiKey}`) as GoogleResult;
     if(response.status === "OK") {
-      const results = response.results;
-      // Get the top result
-      const result = results[0];
-      return this.toGeoCoordinates(result.geometry);
+      return response.results[0];
     } else {
-      throw new Error(`${response.status}`);
+      throw new Error(`${response.error_message}`);
     }
   }
 }

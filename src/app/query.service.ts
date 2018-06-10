@@ -14,6 +14,8 @@ import {HttpUtilsService} from "./http.utils.service";
 import {ResultJson} from "./result.json";
 import {EntityExtractorService} from "./entity.extractor.service";
 import * as KeywordExtractor from "keyword-extractor";
+import {entityValue} from "aws-sdk/clients/health";
+import {environment} from "../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -70,8 +72,8 @@ export class QueryService {
 
   async createQuery(input: string): Promise<Query> {
 
-    // const comprehend = await this.awsService.getService(Comprehend);
-    // const data = await comprehend.detectEntities({Text: input, LanguageCode: "en"}).promise();
+     // const comprehend = await this.awsService.getService(Comprehend);
+     // const data = await comprehend.detectEntities({Text: input, LanguageCode: "en"}).promise();
     // const entites = data.Entities.sort((e1, e2) => e2.Score - e1.Score);
 
     const snerEntites = await this.snerEntityService.extractEntities(input);
@@ -87,7 +89,8 @@ export class QueryService {
     }
 
     // Choose date and location with highest score
-    const coordinates = await this.geoService.getGeoCoordinates(locations[0]);
+    const googleResult = await this.geoService.getGoogleResult(locations[0]);
+    const geoCoordinates = this.geoService.toGeoCoordinates(googleResult.geometry);
 
     // Put dates into ascending order
     dates.sort((d1, d2) => d1.getTime() - d2.getTime());
@@ -103,7 +106,8 @@ export class QueryService {
         min: dates[0],
         max: dates[dates.length -1]
       },
-      geoCoordinates: coordinates,
+      googleResult,
+      geoCoordinates,
       variable: climateVariable
     };
 
