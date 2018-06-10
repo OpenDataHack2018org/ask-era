@@ -52,16 +52,18 @@ export class QueryService {
 
   toVariable(input: string): ClimateVariable {
 
-    const stems = KeywordExtractor.extract(input, {
+    const words = KeywordExtractor.extract(input, {
       language:"english",
       remove_digits: true,
       return_changed_case: true,
       remove_duplicates: true
-    }).map(word => stemmer.stemmer(word));
+    });
+    // Stems seem to produce unreliable results
+    const stems = words.map(word => stemmer.stemmer(word));
 
     return Object.keys(this.stems).find(variable => {
       const validStems = this.stems[variable] as string[];
-      return !!validStems.find(validStem => stems.indexOf(validStem) > -1);
+      return !!validStems.find(validStem => !!words.find(word => word.startsWith(validStem)));
     }) as ClimateVariable;
 
   }
